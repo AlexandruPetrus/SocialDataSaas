@@ -1,0 +1,6 @@
+Flask==2.3.3
+textblob==0.18.0.post0
+matplotlib==3.8.3
+fpdf==1.7.2
+tweepy==4.14.0
+praw==7.7.1

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Résultats - {{ reseau|capitalize }}</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>Résultats - {{ reseau|capitalize }} ({{ mot_cle }})</h1>
+    </header>
+    <div class="container">
+        <section class="stats">
+            <h2>Statistiques</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <p>Total Posts</p>
+                    <span>{{ stats.total }}</span>
+                </div>
+                <div class="stat-card">
+                    <p>Positif</p>
+                    <span>{{ "%.1f"|format(stats.positif_pct) }}%</span>
+                </div>
+                <div class="stat-card">
+                    <p>Négatif</p>
+                    <span>{{ "%.1f"|format(stats.negatif_pct) }}%</span>
+                </div>
+                <div class="stat-card">
+                    <p>Neutre</p>
+                    <span>{{ "%.1f"|format(stats.neutre_pct) }}%</span>
+                </div>
+                <div class="stat-card">
+                    <p>Longueur Moyenne</p>
+                    <span>{{ "%.1f"|format(stats.longueur_moyenne) }} caractères</span>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Top Mots Positifs</h2>
+            <ul>
+                {% for mot, freq in stats.mots_positifs %}
+                    <li>{{ mot }} : {{ freq }} fois</li>
+                {% endfor %}
+            </ul>
+        </section>
+        
+        <section>
+            <h2>Top Mots Négatifs</h2>
+            <ul>
+                {% for mot, freq in stats.mots_negatifs %}
+                    <li>{{ mot }} : {{ freq }} fois</li>
+                {% endfor %}
+            </ul>
+        </section>
+        
+        <section class="graphiques">
+            <h2>Graphiques</h2>
+            <img src="/static/sentiments.png" alt="Sentiments">
+            <img src="/static/tendances.png" alt="Tendances">
+            <img src="/static/heures.png" alt="Fréquence par Heure">
+        </section>
+        
+        <section>
+            <h2>Tendances</h2>
+            <ul>
+                {% for mot, freq in tendances %}
+                    <li>{{ mot }} : {{ freq }} fois</li>
+                {% endfor %}
+            </ul>
+        </section>
+        
+        <div class="actions">
+            <a href="/static/rapport.pdf" download class="button">Télécharger PDF</a>
+            <a href="/" class="button">Retour</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Analyse Sociale</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script>
+        function updateApiFields() {
+            const reseau = document.getElementById("reseau").value;
+            document.getElementById("twitter_fields").style.display = reseau === "twitter" ? "block" : "none";
+            document.getElementById("reddit_fields").style.display = reseau === "reddit" ? "block" : "none";
+            document.getElementById("other_fields").style.display = reseau === "instagram" || reseau === "facebook" ? "block" : "none";
+        }
+    </script>
+</head>
+<body onload="updateApiFields()">
+    <header>
+        <h1>Analyse de Données Sociales</h1>
+    </header>
+    <div class="container">
+        <form method="post" class="form">
+            <label for="reseau">Réseau Social :</label>
+            <select name="reseau" id="reseau" onchange="updateApiFields()" required>
+                <option value="twitter">Twitter</option>
+                <option value="reddit">Reddit</option>
+                <option value="instagram">Instagram (non disponible)</option>
+                <option value="facebook">Facebook (non disponible)</option>
+            </select>
+
+            <!-- Champs API Twitter -->
+            <div id="twitter_fields">
+                <label for="twitter_bearer_token">Bearer Token (Twitter) :</label>
+                <input type="text" name="twitter_bearer_token" id="twitter_bearer_token" placeholder="Entrez votre Bearer Token">
+            </div>
+
+            <!-- Champs API Reddit -->
+            <div id="reddit_fields" style="display: none;">
+                <label for="reddit_client_id">Client ID (Reddit) :</label>
+                <input type="text" name="reddit_client_id" id="reddit_client_id" placeholder="Entrez votre Client ID">
+                <label for="reddit_client_secret">Client Secret (Reddit) :</label>
+                <input type="text" name="reddit_client_secret" id="reddit_client_secret" placeholder="Entrez votre Client Secret">
+                <label for="reddit_user_agent">User Agent (Reddit) :</label>
+                <input type="text" name="reddit_user_agent" id="reddit_user_agent" value="mon_saas/1.0" placeholder="ex. mon_saas/1.0">
+            </div>
+
+            <!-- Message pour Instagram/Facebook -->
+            <div id="other_fields" style="display: none;">
+                <p class="info">Instagram et Facebook nécessitent un accès Graph API non implémenté dans cette version.</p>
+            </div>
+
+            <label for="mot_cle">Mot-clé :</label>
+            <input type="text" name="mot_cle" id="mot_cle" placeholder="ex. #data" required>
+            <input type="submit" value="Analyser" class="button">
+        </form>
+        {% if erreur %}
+            <p class="erreur">{{ erreur }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
