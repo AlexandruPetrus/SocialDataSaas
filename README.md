@@ -17,5 +17,5 @@ Un outil web pour analyser les sentiments et tendances sur les réseaux sociaux 
 ## Installation
 1. Clonez le dépôt :
    ```bash
-   git clone https://github.com/ton_utilisateur/ton_projet.git
-   cd ton_projet
+   git clone https://github.com/AlexandruPetrus/SocialDataSaaS.git
+   cd SocialDataSaaS
